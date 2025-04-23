@@ -205,28 +205,24 @@ let ws;
 const delay = 2e3;
 const timeShowError = 3e3;
 let attempt = 1;
+let createdModal;
 const initWebSocket = () => {
   ws = new WebSocket("ws://localhost:4000/");
-  const createdModal = createReconnectModal();
   const body = document.querySelector(".body");
-  body.prepend(createdModal);
-  body.classList.add("hidden");
   ws.addEventListener("close", () => {
     reconnectToServer();
-    body.prepend(createdModal);
     body.classList.add("hidden");
     console.warn("WebSocket closed");
   });
   ws.addEventListener("error", () => {
     reconnectToServer();
-    body.prepend(createdModal);
     body.classList.add("hidden");
     console.warn("WebSocket closed");
   });
   ws.addEventListener("open", () => {
     attempt = 1;
     console.log("WebSocket connected");
-    createdModal.remove();
+    createdModal == null ? void 0 : createdModal.remove();
     body.classList.remove("hidden");
   });
   ws.addEventListener("message", (event) => {
@@ -273,8 +269,13 @@ const initWebSocket = () => {
   });
 };
 const reconnectToServer = () => {
+  const body = document.querySelector(".body");
+  if (!createdModal) {
+    createdModal = createReconnectModal();
+    body.prepend(createdModal);
+  }
+  body.classList.add("hidden");
   const connectionFrequency = delay * attempt;
-  console.log(connectionFrequency);
   attempt += 1;
   setTimeout(() => {
     initWebSocket();
