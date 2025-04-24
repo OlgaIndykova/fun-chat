@@ -63,10 +63,10 @@
   color: var(--grey);
   box-sizing: border-box;
   display: flex;
-  flex-direction: column;
-  justify-content: end;
+  flex-direction: column-reverse;
+  justify-content: flex-start;
   gap: 10px;
-  overflow-y: auto;
+  overflow-y: scroll;
   align-items: end;
 }
 

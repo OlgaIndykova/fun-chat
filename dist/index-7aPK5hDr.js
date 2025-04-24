@@ -266,7 +266,7 @@ const initWebSocket = () => {
     if (response.type === "MSG_SEND") {
       const messagesField = document.querySelector(".messages-field");
       const newMessage = createUserMessage(response.payload.message.datetime, response.payload.message.text);
-      messagesField.append(newMessage);
+      messagesField.prepend(newMessage);
     }
   });
 };
