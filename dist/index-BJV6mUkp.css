@@ -63,11 +63,11 @@
   color: var(--grey);
   box-sizing: border-box;
   display: flex;
-  flex-direction: column-reverse;
-  justify-content: flex-start;
+  flex-direction: column;
+  justify-content: end;
   gap: 10px;
   overflow-y: auto;
-  align-items: flex-end;
+  align-items: end;
 }
 
 .created-message {

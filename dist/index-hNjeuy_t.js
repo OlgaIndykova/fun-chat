@@ -246,7 +246,7 @@ const initWebSocket = () => {
       const errorMessage = response.payload.error;
       const errorContainer = header.querySelector(".error-container");
       if (errorMessage) {
-        errorContainer.textContent = errorMessage;
+        errorContainer.innerHTML = `Something went wrong:<br>${errorMessage}`;
         errorContainer.classList.add("show");
         setTimeout(() => {
           errorContainer.classList.remove("show");
