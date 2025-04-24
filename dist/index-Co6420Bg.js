@@ -61,11 +61,13 @@ function createElement(tag, className, textContent, id, onClick) {
   if (onClick) element.addEventListener("click", onClick);
   return element;
 }
+let senderLogin;
 const sendMessage = (event) => {
   event.preventDefault();
   const userInput = document.querySelector(".user-input");
   const person = document.querySelector(".companion-name");
   if (!userInput.value.trim()) return;
+  senderLogin = person.textContent || "";
   ws.send(
     JSON.stringify({
       id: "",
@@ -187,7 +189,7 @@ const createUserMessage = (time, text2) => {
   const messageWrapper = createElement("div", "message-wrapper");
   const messageWrapperTop = createElement("div", "messageWrapper-top");
   const dateTime = createElement("div", "date-time", date.toLocaleString());
-  const senderName = createElement("div", "sender-name", "you");
+  const senderName = createElement("div", "sender-name", senderLogin);
   const manipulations = createElement("div");
   const editButton = createElement("button", "edit-btn", "🖊️");
   const deleteButton = createElement("button", "delete-btn", "❌", "", () => messageWrapper.remove());
